@@ -12,17 +12,17 @@ app = FastAPI()
 # Enable CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # React frontend URL
+    allow_origins=["http://localhost:3000"],  #React frontend URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Load models
+#models
 rf_model = joblib.load('phishing_model.pkl')
 xgb_model = joblib.load('phishing_model_xgb.pkl')
 
-# Load blocklist
+# blocklist
 with open('cert_blocklist.txt', 'r') as f:
     cert_domains = set(line.strip().lower().replace('www.', '') for line in f)
 
@@ -59,10 +59,9 @@ async def predict(request: URLRequest):
         features = extract_features(request.url)
         df = pd.DataFrame([features])
         
-        # Get prediction
         prediction = rf_model.predict(df)[0]
         
-        # Hardcoded metrics from your training results
+        # Hardcoded metrics from training results
         return {
             "is_phishing": bool(prediction),
             "recall": 0.60,
@@ -80,10 +79,10 @@ async def predict_xgb(request: URLRequest):
         features = extract_features(request.url)
         df = pd.DataFrame([features])
         
-        # Get prediction
+        
         prediction = xgb_model.predict(df)[0]
         
-        # Hardcoded metrics from your training results
+        # Hardcoded metrics fro training results
         return {
             "is_phishing": bool(prediction),
             "recall": 0.73,
@@ -108,11 +107,11 @@ async def compare_models(request: URLRequest):
         xgb_pred = xgb_model.predict(df)[0]
         xgb_prob = xgb_model.predict_proba(df)[0][1]
         
-        # Hardcoded metrics from your training results
+        # Hardcoded metrics from training results
         return {
             "rf": {
                 "is_phishing": bool(rf_pred),
-                "recall": 0.60,  # From your training results
+                "recall": 0.60,  
                 "precision": 0.58,
                 "f1_score": 0.59,
                 "accuracy": 0.76,
@@ -120,7 +119,7 @@ async def compare_models(request: URLRequest):
             },
             "xgb": {
                 "is_phishing": bool(xgb_pred),
-                "recall": 0.73,  # From your training results
+                "recall": 0.73,  
                 "precision": 0.49,
                 "f1_score": 0.59,
                 "accuracy": 0.71,
