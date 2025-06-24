@@ -32,22 +32,12 @@ The project uses Python and several ML libraries. All dependencies are listed in
     git clone https://github.com/wiktoriachojnacka/PhishingChecker.git
     cd PhishingChecker
     ```
-
-2. **(Optional) Create a virtual environment:**
-    ```bash
-    python -m venv venv
-    # For Linux/macOS:
-    source venv/bin/activate
-    # For Windows:
-    venv\Scripts\activate
-    ```
-
-3. **Install Python dependencies:**
+2. **Install Python dependencies:**
     ```bash
     py -3.11 -m pip install -r requirements.txt
     ```
 
-4. **Make sure the `phishing_data.csv` file is in the project folder.**
+3. **Make sure the `phishing_data.csv` file is in the project folder.**
 
 ---
 
