@@ -107,7 +107,7 @@ npm run dev
 - `feature_importance_xgb.png` – feature importance plot for the XGBoost model
 
 **Note:**  
-All graphs were created by myself using [Miro](https://miro.com/).
+All graphs were created by me using [Miro](https://miro.com/).
 
 ---
 
